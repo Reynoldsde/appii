@@ -1,0 +1,1381 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Apply Now - Loyal Training Hub</title>
+    <meta name="description" content="Apply to Loyal Training Hub - Transform your career with our comprehensive IT and Language training programs in Rwanda.">
+    <meta name="keywords" content="apply, admission, training, IT courses, language learning, Rwanda, Loyal Training Hub">
+    
+    <meta property="og:title" content="Apply Now - Loyal Training Hub">
+    <meta property="og:description" content="Transform your career with our comprehensive training programs">
+    <meta property="og:type" content="website">
+    <meta property="og:image" content="https://i.imgur.com/uLLa9dm.png">
+    
+    <link rel="canonical" href="https://lth-school-4dii.vercel.app/apply.html">
+    
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        :root {
+            /* Color System - Logo-based colors: Orange/Gold primary */
+            --primary: 31 100% 45%;           /* Orange/Gold #C67C1F */
+            --primary-glow: 31 100% 55%;      /* Lighter Orange/Gold */
+            --secondary: 0 0% 100%;           /* White #FFFFFF */
+            --accent: 200 100% 25%;           /* Ocean Blue (minimal use) */
+            --background: 0 0% 100%;          /* White background */
+            --foreground: 222.2 84% 4.9%;    /* Dark text */
+            --muted: 210 40% 96.1%;
+            --muted-foreground: 215.4 16.3% 46.9%;
+            --card: 0 0% 100%;
+            --border: 214.3 31.8% 91.4%;
+            
+            /* Gradients - Orange/Gold with white */
+            --gradient-hero: linear-gradient(135deg, hsl(0 0% 100%) 0%, hsl(31 100% 50%) 100%);
+            --gradient-card: linear-gradient(145deg, hsl(var(--card)), hsl(var(--muted)));
+            
+            /* Shadows - Orange/Gold theme */
+            --shadow-premium: 0 25px 50px -12px hsl(31 100% 45% / 0.25);
+            --shadow-glow: 0 0 40px hsl(31 100% 45% / 0.3);
+            --shadow-card: 0 10px 30px -10px hsl(var(--foreground) / 0.1);
+            
+            /* Transitions */
+            --transition-smooth: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            line-height: 1.6;
+            color: hsl(var(--foreground));
+            background: hsl(var(--background));
+            overflow-x: hidden;
+        }
+
+        /* Loading Screen */
+        .loading-screen {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: var(--gradient-hero);
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            transition: opacity 0.5s ease-out;
+        }
+        
+        .loading-screen.fade-out {
+            opacity: 0;
+            pointer-events: none;
+        }
+        
+        .loading-animation {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: rgba(255, 255, 255, 0.2);
+            backdrop-filter: blur(10px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            animation: pulse 2s ease-in-out infinite;
+            margin-bottom: 2rem;
+        }
+        
+        .loading-content {
+            font-size: 2rem;
+            font-weight: bold;
+            color: white;
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        @keyframes pulse {
+            0%, 100% { transform: scale(1); box-shadow: 0 0 40px rgba(255,255,255,0.3); }
+            50% { transform: scale(1.1); box-shadow: 0 0 60px rgba(255,255,255,0.5); }
+        }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* Utility Classes */
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 1rem;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 0.5rem;
+            padding: 0.75rem 1.5rem;
+            border-radius: 0.75rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: var(--transition-smooth);
+            border: none;
+            cursor: pointer;
+            font-size: 1rem;
+            min-height: 48px;
+        }
+        
+        .btn-primary {
+            background: #C67C1F;
+            color: white;
+            box-shadow: var(--shadow-premium);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px) scale(1.05);
+            box-shadow: var(--shadow-glow);
+        }
+
+        .btn-secondary {
+            background: hsl(var(--muted));
+            color: hsl(var(--foreground));
+            border: 1px solid hsl(var(--border));
+        }
+        
+        .btn-secondary:hover {
+            background: hsl(var(--primary) / 0.1);
+            border-color: hsl(var(--primary));
+            transform: translateY(-2px);
+        }
+
+        .card {
+            background: var(--gradient-card);
+            border-radius: 1rem;
+            padding: 2rem;
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+            border: 1px solid hsl(var(--border));
+        }
+
+        /* Header */
+        .header {
+            position: fixed;
+            top: 0;
+            left: 0;
+            right: 0;
+            z-index: 1000;
+            background: rgba(255, 255, 255, 0.95);
+            backdrop-filter: blur(12px);
+            box-shadow: var(--shadow-card);
+            transition: var(--transition-smooth);
+            border-bottom: 1px solid hsl(var(--border));
+        }
+        
+        .nav-container {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 0.75rem 0;
+            min-height: 60px;
+            gap: 1rem;
+        }
+        
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 0.75rem;
+            text-decoration: none;
+            color: inherit;
+        }
+        
+        .logo-img {
+            width: 5rem;
+            height: 5rem;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid hsl(var(--primary));
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+        }
+        
+        .logo-text h1 {
+            font-size: 1.5rem;
+            font-weight: bold;
+            margin: 0;
+            color: hsl(var(--primary));
+        }
+
+        .logo-text p {
+            font-size: 0.8rem;
+            color: hsl(var(--muted-foreground));
+            margin: 0;
+        }
+
+        .gradient-text {
+            background: var(--gradient-hero);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        /* Main Application Section */
+        .application-section {
+            padding: 8rem 0 5rem;
+            background: linear-gradient(135deg, hsl(var(--primary) / 0.05), hsl(var(--accent) / 0.05));
+            min-height: 100vh;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 4rem;
+        }
+        
+        .section-title {
+            font-size: clamp(2rem, 5vw, 3rem);
+            font-weight: bold;
+            margin-bottom: 1rem;
+        }
+        
+        .section-subtitle {
+            font-size: 1.2rem;
+            color: hsl(var(--muted-foreground));
+            max-width: 600px;
+            margin: 0 auto;
+        }
+        
+        .section-divider {
+            width: 5rem;
+            height: 0.25rem;
+            background: var(--gradient-hero);
+            margin: 1.5rem auto;
+            border-radius: 2px;
+        }
+
+        /* Application Form Styles */
+        .application-form {
+            max-width: 900px;
+            margin: 0 auto;
+        }
+
+        .form-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--foreground));
+            font-size: 0.95rem;
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.75rem 1rem;
+            border: 2px solid hsl(var(--border));
+            border-radius: 0.5rem;
+            font-size: 1rem;
+            background: hsl(var(--background));
+            color: hsl(var(--foreground));
+            transition: var(--transition-smooth);
+            min-height: 48px;
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: hsl(var(--primary));
+            box-shadow: 0 0 0 3px hsl(var(--primary) / 0.1);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .form-file {
+            padding: 0.5rem;
+            background: hsl(var(--muted));
+            border: 2px dashed hsl(var(--border));
+            border-radius: 0.5rem;
+            text-align: center;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+        }
+
+        .form-file:hover {
+            border-color: hsl(var(--primary));
+            background: hsl(var(--primary) / 0.05);
+        }
+
+        /* Program Cards */
+        .program-selection {
+            margin-bottom: 2rem;
+        }
+
+        .program-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .program-card {
+            padding: 1.5rem;
+            border: 2px solid hsl(var(--border));
+            border-radius: 0.75rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            background: white;
+        }
+
+        .program-card:hover {
+            border-color: hsl(var(--primary));
+            box-shadow: var(--shadow-card);
+            transform: translateY(-2px);
+        }
+
+        .program-card.selected {
+            border-color: hsl(var(--primary));
+            background: hsl(var(--primary) / 0.05);
+            box-shadow: var(--shadow-premium);
+        }
+
+        .program-icon {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+        }
+
+        .program-title {
+            font-size: 1.2rem;
+            font-weight: bold;
+            margin-bottom: 0.5rem;
+            color: hsl(var(--foreground));
+        }
+
+        .program-description {
+            font-size: 0.9rem;
+            color: hsl(var(--muted-foreground));
+            line-height: 1.5;
+        }
+
+        /* Progress Steps */
+        .progress-steps {
+            display: flex;
+            justify-content: center;
+            margin-bottom: 3rem;
+            gap: 1rem;
+            flex-wrap: wrap;
+        }
+
+        .step {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            border-radius: 2rem;
+            background: hsl(var(--muted));
+            color: hsl(var(--muted-foreground));
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+
+        .step.active {
+            background: hsl(var(--primary));
+            color: white;
+        }
+
+        .step.completed {
+            background: hsl(var(--primary) / 0.2);
+            color: hsl(var(--primary));
+        }
+
+        /* Success Message */
+        .success-message {
+            display: none;
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 1rem;
+            box-shadow: var(--shadow-card);
+        }
+
+        .success-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        /* Mobile Optimization */
+        @media (max-width: 768px) {
+            .application-section {
+                padding: 6rem 0 3rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .form-grid {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .program-cards {
+                grid-template-columns: 1fr;
+                gap: 1rem;
+            }
+
+            .progress-steps {
+                flex-direction: column;
+                align-items: center;
+            }
+
+            .section-title {
+                font-size: 1.8rem;
+            }
+
+            .section-subtitle {
+                font-size: 1rem;
+            }
+        }
+
+        @media (max-width: 480px) {
+            .logo-img {
+                width: 3rem;
+                height: 3rem;
+            }
+
+            .logo-text h1 {
+                font-size: 1.2rem;
+            }
+
+            .logo-text p {
+                font-size: 0.75rem;
+            }
+
+            .nav-container {
+                padding: 0.5rem 0;
+            }
+
+            .application-section {
+                padding: 5rem 0 2rem;
+            }
+        }
+
+        /* Language Switcher */
+        .language-switcher {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.5rem 1rem;
+            background: rgba(255, 255, 255, 0.2);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            border-radius: 0.5rem;
+            cursor: pointer;
+            transition: var(--transition-smooth);
+            font-weight: 600;
+            color: hsl(var(--primary));
+            text-decoration: none;
+        }
+
+        .language-switcher:hover {
+            background: rgba(255, 255, 255, 0.3);
+            transform: translateY(-1px);
+        }
+
+        /* WhatsApp Support Button */
+        .whatsapp-float {
+            position: fixed;
+            bottom: 2rem;
+            right: 2rem;
+            width: 4rem;
+            height: 4rem;
+            background: #25D366;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            text-decoration: none;
+            font-size: 1.5rem;
+            box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+            z-index: 1000;
+            transition: var(--transition-smooth);
+            animation: pulse-whatsapp 2s infinite;
+        }
+        
+        .whatsapp-float:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 20px rgba(37, 211, 102, 0.6);
+        }
+        
+        @keyframes pulse-whatsapp {
+            0% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4), 0 0 0 10px rgba(37, 211, 102, 0.1); }
+            100% { box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4); }
+        }
+
+        .animate-on-scroll {
+            opacity: 0;
+            transform: translateY(30px);
+            transition: opacity 0.6s ease, transform 0.6s ease;
+        }
+        
+        .animate-on-scroll.animate {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    </style>
+</head>
+<body>
+    <!-- Loading Screen -->
+    <div class="loading-screen" id="loadingScreen">
+        <div class="loading-animation">
+            <div style="font-size: 2rem;">🎓</div>
+        </div>
+        <div class="loading-content">
+            Preparing Your Application...
+        </div>
+    </div>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <nav class="nav-container">
+                <a href="index.html" class="logo">
+                    <img src="https://i.imgur.com/uLLa9dm.png" alt="LTH Logo" class="logo-img" onerror="this.src='data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22><circle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22%23C67C1F%22/><text x=%2250%22 y=%2260%22 text-anchor=%22middle%22 fill=%22white%22 font-size=%2224%22 font-weight=%22bold%22>LTH</text></svg>'">
+                    <div class="logo-text">
+                        <h1 class="gradient-text">Loyal Training Hub</h1>
+                        <p data-translate="empoweringFutures">Empowering Futures</p>
+                    </div>
+                </a>
+                
+                <div style="display: flex; align-items: center; gap: 1rem;">
+                    <button class="language-switcher" onclick="toggleLanguage()">
+                        🌐 <span id="currentLang">FR</span>
+                    </button>
+                    <a href="index.html" class="btn btn-secondary">← <span data-translate="backToHome">Back to Home</span></a>
+                </div>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Application Section -->
+    <section class="application-section">
+        <div class="container">
+            <!-- Progress Steps -->
+            <div class="progress-steps animate-on-scroll">
+                <div class="step active" id="step1">
+                    <span>📋</span>
+                    <span data-translate="personalInfo">Personal Info</span>
+                </div>
+                <div class="step" id="step2">
+                    <span>🎯</span>
+                    <span data-translate="programSelection">Program Selection</span>
+                </div>
+                <div class="step" id="step3">
+                    <span>📄</span>
+                    <span data-translate="documents">Documents</span>
+                </div>
+                <div class="step" id="step4">
+                    <span>✅</span>
+                    <span data-translate="review">Review & Submit</span>
+                </div>
+            </div>
+
+            <div class="section-header animate-on-scroll">
+                <div style="display: inline-flex; align-items: center; justify-content: center; width: 5rem; height: 5rem; background: var(--gradient-hero); border-radius: 1.5rem; margin-bottom: 1.5rem;">
+                    <div style="font-size: 2rem;">🎓</div>
+                </div>
+                <h1 class="section-title">
+                    <span data-translate="applicationTitle">Apply to <span class="gradient-text">Loyal Training Hub</span></span>
+                </h1>
+                <div class="section-divider"></div>
+                <p class="section-subtitle" data-translate="applicationSubtitle">Take the first step towards transforming your career. Complete your application below and join thousands of successful graduates.</p>
+            </div>
+
+            <!-- Application Form -->
+            <div class="application-form animate-on-scroll">
+                <div class="card">
+                    <form id="applicationForm" action="https://formspree.io/f/xblkbryo" method="POST" enctype="multipart/form-data">
+                        <!-- Step 1: Personal Information -->
+                        <div id="step1Content" class="form-step">
+                            <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 2rem; color: hsl(var(--primary));">
+                                📋 <span data-translate="personalInformation">Personal Information</span>
+                            </h2>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label data-translate="firstName">First Name *</label>
+                                    <input type="text" name="firstName" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label data-translate="lastName">Last Name *</label>
+                                    <input type="text" name="lastName" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="middleName">Middle Name (Optional)</label>
+                                <input type="text" name="middleName" class="form-input">
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label data-translate="emailAddress">Email Address *</label>
+                                    <input type="email" name="email" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label data-translate="phoneNumber">Phone Number *</label>
+                                    <input type="tel" name="phone" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="currentAddress">Current Address *</label>
+                                <textarea name="address" class="form-textarea" rows="3" required></textarea>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label data-translate="countryOfOrigin">Country of Origin *</label>
+                                    <input type="text" name="country" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label data-translate="primaryLanguage">Your Primary Language *</label>
+                                    <input type="text" name="primaryLanguage" class="form-input" required>
+                                </div>
+                            </div>
+
+                            <div class="form-grid">
+                                <div class="form-group">
+                                    <label data-translate="dateOfBirth">Date of Birth *</label>
+                                    <input type="date" name="dateOfBirth" class="form-input" required>
+                                </div>
+                                <div class="form-group">
+                                    <label data-translate="gender">Gender</label>
+                                    <select name="gender" class="form-select">
+                                        <option value="" data-translate="selectGender">Select Gender</option>
+                                        <option value="male" data-translate="male">Male</option>
+                                        <option value="female" data-translate="female">Female</option>
+                                        <option value="other" data-translate="other">Other</option>
+                                        <option value="prefer-not-to-say" data-translate="preferNotToSay">Prefer not to say</option>
+                                    </select>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="educationBackground">Education Background *</label>
+                                <select name="education" class="form-select" required>
+                                    <option value="" data-translate="selectEducation">Select your highest education level</option>
+                                    <option value="primary" data-translate="primaryEducation">Primary Education</option>
+                                    <option value="secondary" data-translate="secondaryEducation">Secondary Education</option>
+                                    <option value="diploma" data-translate="diploma">Diploma</option>
+                                    <option value="bachelor" data-translate="bachelor">Bachelor's Degree</option>
+                                    <option value="master" data-translate="master">Master's Degree</option>
+                                    <option value="phd" data-translate="phd">PhD</option>
+                                    <option value="other" data-translate="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div style="text-align: right; margin-top: 2rem;">
+                                <button type="button" class="btn btn-primary" onclick="nextStep(1)">
+                                    <span data-translate="next">Next</span> →
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 2: Program Selection -->
+                        <div id="step2Content" class="form-step" style="display: none;">
+                            <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 2rem; color: hsl(var(--primary));">
+                                🎯 <span data-translate="selectProgram">Select Your Program</span>
+                            </h2>
+
+                            <div class="program-selection">
+                                <p style="color: hsl(var(--muted-foreground)); margin-bottom: 2rem;" data-translate="programSelectionDesc">Choose the program that best fits your career goals and interests.</p>
+                                
+                                <div class="program-cards">
+                                    <div class="program-card" data-program="english-language" onclick="selectProgram(this)">
+                                        <div class="program-icon">🇬🇧</div>
+                                        <div class="program-title" data-translate="englishLanguage">English Language</div>
+                                        <div class="program-description" data-translate="englishDescription">Master English for global opportunities, IELTS/TOEFL preparation included</div>
+                                    </div>
+
+                                    <div class="program-card" data-program="french-language" onclick="selectProgram(this)">
+                                        <div class="program-icon">🇫🇷</div>
+                                        <div class="program-title" data-translate="frenchLanguage">French Language</div>
+                                        <div class="program-description" data-translate="frenchDescription">Develop French proficiency, DELF/TEF certification preparation</div>
+                                    </div>
+
+                                    <div class="program-card" data-program="chinese-language" onclick="selectProgram(this)">
+                                        <div class="program-icon">🇨🇳</div>
+                                        <div class="program-title" data-translate="chineseLanguage">Chinese Language</div>
+                                        <div class="program-description" data-translate="chineseDescription">Learn Mandarin Chinese, HSK exam preparation available</div>
+                                    </div>
+
+                                    <div class="program-card" data-program="software-development" onclick="selectProgram(this)">
+                                        <div class="program-icon">💻</div>
+                                        <div class="program-title" data-translate="softwareDevelopment">Software Development</div>
+                                        <div class="program-description" data-translate="softwareDescription">Full-stack development, programming languages, frameworks</div>
+                                    </div>
+
+                                    <div class="program-card" data-program="ict-computer-software" onclick="selectProgram(this)">
+                                        <div class="program-icon">🖥️</div>
+                                        <div class="program-title" data-translate="ictComputerSoftware">ICT & Computer Software</div>
+                                        <div class="program-description" data-translate="ictDescription">ArchiCAD, Revit, SolidWorks, Adobe Creative Suite</div>
+                                    </div>
+
+                                    <div class="program-card" data-program="international-certification" onclick="selectProgram(this)">
+                                        <div class="program-icon">🏆</div>
+                                        <div class="program-title" data-translate="internationalCertification">International Certification</div>
+                                        <div class="program-description" data-translate="certificationDescription">Prepare for globally recognized language certifications</div>
+                                    </div>
+                                </div>
+
+                                <input type="hidden" name="selectedProgram" id="selectedProgram" required>
+                                
+                                <div class="form-group" style="margin-top: 2rem;">
+                                    <label data-translate="preferredStartDate">Preferred Start Date *</label>
+                                    <input type="date" name="startDate" class="form-input" required>
+                                </div>
+
+                                <div class="form-group">
+                                    <label data-translate="learningPreference">Learning Preference *</label>
+                                    <select name="learningMode" class="form-select" required>
+                                        <option value="" data-translate="selectLearningMode">Select learning mode</option>
+                                        <option value="in-person" data-translate="inPerson">In-Person</option>
+                                        <option value="online" data-translate="online">Online</option>
+                                        <option value="hybrid" data-translate="hybrid">Hybrid (In-Person + Online)</option>
+                                    </select>
+                                </div>
+
+                                <div class="form-group">
+                                    <label data-translate="previousExperience">Previous Experience in This Field</label>
+                                    <textarea name="experience" class="form-textarea" rows="3" data-translate-placeholder="describePrevious" placeholder="Describe any previous experience or skills related to your chosen program..."></textarea>
+                                </div>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                                <button type="button" class="btn btn-secondary" onclick="previousStep(2)">
+                                    ← <span data-translate="previous">Previous</span>
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="nextStep(2)">
+                                    <span data-translate="next">Next</span> →
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 3: Documents -->
+                        <div id="step3Content" class="form-step" style="display: none;">
+                            <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 2rem; color: hsl(var(--primary));">
+                                📄 <span data-translate="documents">Documents & Additional Information</span>
+                            </h2>
+
+                            <div class="form-group">
+                                <label data-translate="identificationDocument">Identification Document (ID/Passport) *</label>
+                                <p style="font-size: 0.9rem; color: hsl(var(--muted-foreground)); margin-bottom: 1rem;" data-translate="idRequired">Upload a clear copy of your ID or Passport for admission letter processing</p>
+                                <input type="file" name="idDocument" class="form-input" accept=".pdf,.jpg,.jpeg,.png" required>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="educationCertificates">Education Certificates (Optional)</label>
+                                <p style="font-size: 0.9rem; color: hsl(var(--muted-foreground)); margin-bottom: 1rem;" data-translate="educationOptional">Upload your highest education certificate or diploma</p>
+                                <input type="file" name="educationCert" class="form-input" accept=".pdf,.jpg,.jpeg,.png">
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="portfolioWork">Portfolio/Previous Work (Optional)</label>
+                                <p style="font-size: 0.9rem; color: hsl(var(--muted-foreground)); margin-bottom: 1rem;" data-translate="portfolioOptional">For IT programs: Upload samples of your previous work or projects</p>
+                                <input type="file" name="portfolio" class="form-input" accept=".pdf,.jpg,.jpeg,.png,.zip">
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="motivationLetter">Why do you want to join this program? *</label>
+                                <textarea name="motivation" class="form-textarea" rows="4" required data-translate-placeholder="motivationPlaceholder" placeholder="Tell us about your goals and why you're interested in this program..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="careerGoals">Career Goals *</label>
+                                <textarea name="careerGoals" class="form-textarea" rows="3" required data-translate-placeholder="careerGoalsPlaceholder" placeholder="Describe your career goals and how this program will help you achieve them..."></textarea>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="howDidYouHear">How did you hear about Loyal Training Hub? *</label>
+                                <select name="referralSource" class="form-select" required>
+                                    <option value="" data-translate="selectReferral">Select an option</option>
+                                    <option value="social-media" data-translate="socialMedia">Social Media</option>
+                                    <option value="website" data-translate="website">Website</option>
+                                    <option value="friend-family" data-translate="friendFamily">Friend or Family</option>
+                                    <option value="former-student" data-translate="formerStudent">Former Student</option>
+                                    <option value="advertisement" data-translate="advertisement">Advertisement</option>
+                                    <option value="search-engine" data-translate="searchEngine">Search Engine</option>
+                                    <option value="other" data-translate="other">Other</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label data-translate="emergencyContact">Emergency Contact Information *</label>
+                                <div class="form-grid">
+                                    <input type="text" name="emergencyName" class="form-input" data-translate-placeholder="emergencyName" placeholder="Emergency Contact Name" required>
+                                    <input type="tel" name="emergencyPhone" class="form-input" data-translate-placeholder="emergencyPhone" placeholder="Emergency Contact Phone" required>
+                                </div>
+                                <input type="text" name="emergencyRelation" class="form-input" data-translate-placeholder="emergencyRelation" placeholder="Relationship to Emergency Contact" required style="margin-top: 0.5rem;">
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                                <button type="button" class="btn btn-secondary" onclick="previousStep(3)">
+                                    ← <span data-translate="previous">Previous</span>
+                                </button>
+                                <button type="button" class="btn btn-primary" onclick="nextStep(3)">
+                                    <span data-translate="next">Next</span> →
+                                </button>
+                            </div>
+                        </div>
+
+                        <!-- Step 4: Review & Submit -->
+                        <div id="step4Content" class="form-step" style="display: none;">
+                            <h2 style="font-size: 1.5rem; font-weight: bold; margin-bottom: 2rem; color: hsl(var(--primary));">
+                                ✅ <span data-translate="reviewSubmit">Review & Submit</span>
+                            </h2>
+
+                            <div id="applicationReview" style="background: hsl(var(--muted)); padding: 2rem; border-radius: 0.75rem; margin-bottom: 2rem;">
+                                <h3 style="margin-bottom: 1rem; color: hsl(var(--primary));" data-translate="applicationSummary">Application Summary</h3>
+                                <div id="reviewContent">
+                                    <!-- Review content will be populated by JavaScript -->
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" name="termsAccepted" required style="margin: 0;">
+                                    <span data-translate="termsConditions">I agree to the Terms and Conditions and Privacy Policy *</span>
+                                </label>
+                            </div>
+
+                            <div class="form-group">
+                                <label style="display: flex; align-items: center; gap: 0.5rem; cursor: pointer;">
+                                    <input type="checkbox" name="marketingConsent" style="margin: 0;">
+                                    <span data-translate="marketingConsent">I agree to receive updates about programs and opportunities (Optional)</span>
+                                </label>
+                            </div>
+
+                            <div style="background: hsl(var(--primary) / 0.1); padding: 1.5rem; border-radius: 0.5rem; margin: 2rem 0; border-left: 4px solid hsl(var(--primary));">
+                                <h4 style="color: hsl(var(--primary)); margin-bottom: 0.5rem;" data-translate="nextSteps">Next Steps:</h4>
+                                <ul style="color: hsl(var(--muted-foreground)); margin-left: 1rem;">
+                                    <li data-translate="step1After">You'll receive a confirmation email within 24 hours</li>
+                                    <li data-translate="step2After">Our admissions team will review your application</li>
+                                    <li data-translate="step3After">We'll contact you within 3 business days for next steps</li>
+                                    <li data-translate="step4After">If approved, you'll receive your admission letter</li>
+                                </ul>
+                            </div>
+
+                            <div style="display: flex; justify-content: space-between; margin-top: 2rem;">
+                                <button type="button" class="btn btn-secondary" onclick="previousStep(4)">
+                                    ← <span data-translate="previous">Previous</span>
+                                </button>
+                                <button type="submit" class="btn btn-primary" style="font-size: 1.1rem; padding: 1rem 2rem;">
+                                    <span data-translate="submitApplication">Submit Application</span> 🎓
+                                </button>
+                            </div>
+                        </div>
+                    </form>
+
+                    <!-- Success Message -->
+                    <div id="successMessage" class="success-message">
+                        <div class="success-icon">🎉</div>
+                        <h2 style="color: hsl(var(--primary)); margin-bottom: 1rem;" data-translate="applicationSubmitted">Application Submitted Successfully!</h2>
+                        <p style="color: hsl(var(--muted-foreground)); margin-bottom: 2rem;" data-translate="thankYouMessage">Thank you for applying to Loyal Training Hub. We have received your application and will review it shortly.</p>
+                        <div style="display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap;">
+                            <a href="index.html" class="btn btn-primary">
+                                <span data-translate="backToHome">← Back to Home</span>
+                            </a>
+                            <a href="https://wa.me/250788244964" class="btn btn-secondary" target="_blank">
+                                💬 <span data-translate="contactUs">Contact Us</span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- WhatsApp Support Button -->
+    <a href="https://wa.me/250788244964?text=Hello! I need help with my application to Loyal Training Hub." class="whatsapp-float" target="_blank" title="Chat on WhatsApp for Application Support">
+        <svg viewBox="0 0 24 24" fill="currentColor" width="24" height="24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893A11.821 11.821 0 0020.885 3.488"/>
+        </svg>
+    </a>
+
+    <script>
+        // Language translations
+        const translations = {
+            en: {
+                empoweringFutures: 'Empowering Futures',
+                backToHome: 'Back to Home',
+                personalInfo: 'Personal Info',
+                programSelection: 'Program Selection',
+                documents: 'Documents',
+                review: 'Review & Submit',
+                applicationTitle: 'Apply to Loyal Training Hub',
+                applicationSubtitle: 'Take the first step towards transforming your career. Complete your application below and join thousands of successful graduates.',
+                personalInformation: 'Personal Information',
+                firstName: 'First Name *',
+                lastName: 'Last Name *',
+                middleName: 'Middle Name (Optional)',
+                emailAddress: 'Email Address *',
+                phoneNumber: 'Phone Number *',
+                currentAddress: 'Current Address *',
+                countryOfOrigin: 'Country of Origin *',
+                primaryLanguage: 'Your Primary Language *',
+                dateOfBirth: 'Date of Birth *',
+                gender: 'Gender',
+                selectGender: 'Select Gender',
+                male: 'Male',
+                female: 'Female',
+                other: 'Other',
+                preferNotToSay: 'Prefer not to say',
+                educationBackground: 'Education Background *',
+                selectEducation: 'Select your highest education level',
+                primaryEducation: 'Primary Education',
+                secondaryEducation: 'Secondary Education',
+                diploma: 'Diploma',
+                bachelor: 'Bachelor\'s Degree',
+                master: 'Master\'s Degree',
+                phd: 'PhD',
+                selectProgram: 'Select Your Program',
+                programSelectionDesc: 'Choose the program that best fits your career goals and interests.',
+                englishLanguage: 'English Language',
+                englishDescription: 'Master English for global opportunities, IELTS/TOEFL preparation included',
+                frenchLanguage: 'French Language',
+                frenchDescription: 'Develop French proficiency, DELF/TEF certification preparation',
+                chineseLanguage: 'Chinese Language',
+                chineseDescription: 'Learn Mandarin Chinese, HSK exam preparation available',
+                softwareDevelopment: 'Software Development',
+                softwareDescription: 'Full-stack development, programming languages, frameworks',
+                ictComputerSoftware: 'ICT & Computer Software',
+                ictDescription: 'ArchiCAD, Revit, SolidWorks, Adobe Creative Suite',
+                internationalCertification: 'International Certification',
+                certificationDescription: 'Prepare for globally recognized language certifications',
+                preferredStartDate: 'Preferred Start Date *',
+                learningPreference: 'Learning Preference *',
+                selectLearningMode: 'Select learning mode',
+                inPerson: 'In-Person',
+                online: 'Online',
+                hybrid: 'Hybrid (In-Person + Online)',
+                previousExperience: 'Previous Experience in This Field',
+                describePrevious: 'Describe any previous experience or skills related to your chosen program...',
+                identificationDocument: 'Identification Document (ID/Passport) *',
+                idRequired: 'Upload a clear copy of your ID or Passport for admission letter processing',
+                educationCertificates: 'Education Certificates (Optional)',
+                educationOptional: 'Upload your highest education certificate or diploma',
+                portfolioWork: 'Portfolio/Previous Work (Optional)',
+                portfolioOptional: 'For IT programs: Upload samples of your previous work or projects',
+                motivationLetter: 'Why do you want to join this program? *',
+                motivationPlaceholder: 'Tell us about your goals and why you\'re interested in this program...',
+                careerGoals: 'Career Goals *',
+                careerGoalsPlaceholder: 'Describe your career goals and how this program will help you achieve them...',
+                howDidYouHear: 'How did you hear about Loyal Training Hub? *',
+                selectReferral: 'Select an option',
+                socialMedia: 'Social Media',
+                website: 'Website',
+                friendFamily: 'Friend or Family',
+                formerStudent: 'Former Student',
+                advertisement: 'Advertisement',
+                searchEngine: 'Search Engine',
+                emergencyContact: 'Emergency Contact Information *',
+                emergencyName: 'Emergency Contact Name',
+                emergencyPhone: 'Emergency Contact Phone',
+                emergencyRelation: 'Relationship to Emergency Contact',
+                reviewSubmit: 'Review & Submit',
+                applicationSummary: 'Application Summary',
+                termsConditions: 'I agree to the Terms and Conditions and Privacy Policy *',
+                marketingConsent: 'I agree to receive updates about programs and opportunities (Optional)',
+                nextSteps: 'Next Steps:',
+                step1After: 'You\'ll receive a confirmation email within 24 hours',
+                step2After: 'Our admissions team will review your application',
+                step3After: 'We\'ll contact you within 3 business days for next steps',
+                step4After: 'If approved, you\'ll receive your admission letter',
+                submitApplication: 'Submit Application',
+                applicationSubmitted: 'Application Submitted Successfully!',
+                thankYouMessage: 'Thank you for applying to Loyal Training Hub. We have received your application and will review it shortly.',
+                contactUs: 'Contact Us',
+                next: 'Next',
+                previous: 'Previous'
+            },
+            fr: {
+                empoweringFutures: 'Autonomiser les Avenirs',
+                backToHome: 'Retour à l\'Accueil',
+                personalInfo: 'Infos Personnelles',
+                programSelection: 'Sélection du Programme',
+                documents: 'Documents',
+                review: 'Révision et Soumission',
+                applicationTitle: 'Postuler à Loyal Training Hub',
+                applicationSubtitle: 'Franchissez la première étape vers la transformation de votre carrière. Complétez votre candidature ci-dessous et rejoignez des milliers de diplômés réussis.',
+                personalInformation: 'Informations Personnelles',
+                firstName: 'Prénom *',
+                lastName: 'Nom de Famille *',
+                middleName: 'Deuxième Prénom (Optionnel)',
+                emailAddress: 'Adresse Email *',
+                phoneNumber: 'Numéro de Téléphone *',
+                currentAddress: 'Adresse Actuelle *',
+                countryOfOrigin: 'Pays d\'Origine *',
+                primaryLanguage: 'Votre Langue Principale *',
+                dateOfBirth: 'Date de Naissance *',
+                gender: 'Genre',
+                selectGender: 'Sélectionner le Genre',
+                male: 'Masculin',
+                female: 'Féminin',
+                other: 'Autre',
+                preferNotToSay: 'Préfère ne pas dire',
+                educationBackground: 'Formation Éducative *',
+                selectEducation: 'Sélectionnez votre niveau d\'éducation le plus élevé',
+                primaryEducation: 'Éducation Primaire',
+                secondaryEducation: 'Éducation Secondaire',
+                diploma: 'Diplôme',
+                bachelor: 'Licence',
+                master: 'Master',
+                phd: 'Doctorat',
+                selectProgram: 'Sélectionnez Votre Programme',
+                programSelectionDesc: 'Choisissez le programme qui correspond le mieux à vos objectifs de carrière et à vos intérêts.',
+                englishLanguage: 'Langue Anglaise',
+                englishDescription: 'Maîtrisez l\'anglais pour les opportunités mondiales, préparation IELTS/TOEFL incluse',
+                frenchLanguage: 'Langue Française',
+                frenchDescription: 'Développez la maîtrise du français, préparation à la certification DELF/TEF',
+                chineseLanguage: 'Langue Chinoise',
+                chineseDescription: 'Apprenez le chinois mandarin, préparation à l\'examen HSK disponible',
+                softwareDevelopment: 'Développement Logiciel',
+                softwareDescription: 'Développement full-stack, langages de programmation, frameworks',
+                ictComputerSoftware: 'TIC et Logiciels Informatiques',
+                ictDescription: 'ArchiCAD, Revit, SolidWorks, Adobe Creative Suite',
+                internationalCertification: 'Certification Internationale',
+                certificationDescription: 'Préparez-vous aux certifications linguistiques reconnues mondialement',
+                preferredStartDate: 'Date de Début Préférée *',
+                learningPreference: 'Préférence d\'Apprentissage *',
+                selectLearningMode: 'Sélectionner le mode d\'apprentissage',
+                inPerson: 'En Personne',
+                online: 'En Ligne',
+                hybrid: 'Hybride (En Personne + En Ligne)',
+                previousExperience: 'Expérience Antérieure dans ce Domaine',
+                describePrevious: 'Décrivez toute expérience ou compétence antérieure liée au programme choisi...',
+                identificationDocument: 'Document d\'Identification (ID/Passeport) *',
+                idRequired: 'Téléchargez une copie claire de votre ID ou Passeport pour le traitement de la lettre d\'admission',
+                educationCertificates: 'Certificats d\'Éducation (Optionnel)',
+                educationOptional: 'Téléchargez votre certificat ou diplôme d\'éducation le plus élevé',
+                portfolioWork: 'Portfolio/Travail Antérieur (Optionnel)',
+                portfolioOptional: 'Pour les programmes IT: Téléchargez des échantillons de votre travail ou projets antérieurs',
+                motivationLetter: 'Pourquoi voulez-vous rejoindre ce programme? *',
+                motivationPlaceholder: 'Parlez-nous de vos objectifs et pourquoi vous êtes intéressé par ce programme...',
+                careerGoals: 'Objectifs de Carrière *',
+                careerGoalsPlaceholder: 'Décrivez vos objectifs de carrière et comment ce programme vous aidera à les atteindre...',
+                howDidYouHear: 'Comment avez-vous entendu parler de Loyal Training Hub? *',
+                selectReferral: 'Sélectionner une option',
+                socialMedia: 'Médias Sociaux',
+                website: 'Site Web',
+                friendFamily: 'Ami ou Famille',
+                formerStudent: 'Ancien Étudiant',
+                advertisement: 'Publicité',
+                searchEngine: 'Moteur de Recherche',
+                emergencyContact: 'Informations de Contact d\'Urgence *',
+                emergencyName: 'Nom du Contact d\'Urgence',
+                emergencyPhone: 'Téléphone du Contact d\'Urgence',
+                emergencyRelation: 'Relation avec le Contact d\'Urgence',
+                reviewSubmit: 'Révision et Soumission',
+                applicationSummary: 'Résumé de la Candidature',
+                termsConditions: 'J\'accepte les Termes et Conditions et la Politique de Confidentialité *',
+                marketingConsent: 'J\'accepte de recevoir des mises à jour sur les programmes et opportunités (Optionnel)',
+                nextSteps: 'Prochaines Étapes:',
+                step1After: 'Vous recevrez un email de confirmation dans les 24 heures',
+                step2After: 'Notre équipe d\'admissions examinera votre candidature',
+                step3After: 'Nous vous contacterons dans les 3 jours ouvrables pour les prochaines étapes',
+                step4After: 'Si approuvé, vous recevrez votre lettre d\'admission',
+                submitApplication: 'Soumettre la Candidature',
+                applicationSubmitted: 'Candidature Soumise avec Succès!',
+                thankYouMessage: 'Merci de postuler à Loyal Training Hub. Nous avons reçu votre candidature et l\'examinerons bientôt.',
+                contactUs: 'Nous Contacter',
+                next: 'Suivant',
+                previous: 'Précédent'
+            }
+        };
+
+        // Language functionality
+        let currentLanguage = 'en';
+
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'fr' : 'en';
+            updateLanguage();
+            updateLanguageButton();
+            localStorage.setItem('lth-language', currentLanguage);
+        }
+
+        function updateLanguage() {
+            const elements = document.querySelectorAll('[data-translate]');
+            elements.forEach(element => {
+                const key = element.getAttribute('data-translate');
+                if (translations[currentLanguage][key]) {
+                    element.textContent = translations[currentLanguage][key];
+                }
+            });
+            
+            // Handle placeholders
+            const placeholderElements = document.querySelectorAll('[data-translate-placeholder]');
+            placeholderElements.forEach(element => {
+                const key = element.getAttribute('data-translate-placeholder');
+                if (translations[currentLanguage][key]) {
+                    element.placeholder = translations[currentLanguage][key];
+                }
+            });
+            
+            document.documentElement.lang = currentLanguage;
+        }
+
+        function updateLanguageButton() {
+            const langButton = document.getElementById('currentLang');
+            if (langButton) {
+                langButton.textContent = currentLanguage === 'en' ? 'FR' : 'EN';
+            }
+        }
+
+        // Initialize language on page load
+        function initLanguage() {
+            const savedLanguage = localStorage.getItem('lth-language');
+            if (savedLanguage && ['en', 'fr'].includes(savedLanguage)) {
+                currentLanguage = savedLanguage;
+            }
+            updateLanguage();
+            updateLanguageButton();
+        }
+
+        // Multi-step form functionality
+        let currentStep = 1;
+
+        function nextStep(step) {
+            if (validateStep(step)) {
+                // Hide current step
+                document.getElementById(`step${step}Content`).style.display = 'none';
+                document.getElementById(`step${step}`).classList.remove('active');
+                document.getElementById(`step${step}`).classList.add('completed');
+                
+                // Show next step
+                const nextStep = step + 1;
+                document.getElementById(`step${nextStep}Content`).style.display = 'block';
+                document.getElementById(`step${nextStep}`).classList.add('active');
+                
+                currentStep = nextStep;
+                
+                // Update review if going to step 4
+                if (nextStep === 4) {
+                    updateReview();
+                }
+                
+                // Scroll to top
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }
+        }
+
+        function previousStep(step) {
+            // Hide current step
+            document.getElementById(`step${step}Content`).style.display = 'none';
+            document.getElementById(`step${step}`).classList.remove('active');
+            
+            // Show previous step
+            const prevStep = step - 1;
+            document.getElementById(`step${prevStep}Content`).style.display = 'block';
+            document.getElementById(`step${prevStep}`).classList.remove('completed');
+            document.getElementById(`step${prevStep}`).classList.add('active');
+            
+            currentStep = prevStep;
+            
+            // Scroll to top
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function validateStep(step) {
+            const stepContent = document.getElementById(`step${step}Content`);
+            const requiredFields = stepContent.querySelectorAll('[required]');
+            let isValid = true;
+            
+            requiredFields.forEach(field => {
+                if (!field.value.trim()) {
+                    field.style.borderColor = 'hsl(0, 100%, 50%)';
+                    isValid = false;
+                } else {
+                    field.style.borderColor = 'hsl(var(--border))';
+                }
+            });
+            
+            // Special validation for step 2 (program selection)
+            if (step === 2) {
+                const selectedProgram = document.getElementById('selectedProgram').value;
+                if (!selectedProgram) {
+                    alert(currentLanguage === 'en' ? 'Please select a program' : 'Veuillez sélectionner un programme');
+                    isValid = false;
+                }
+            }
+            
+            if (!isValid) {
+                alert(currentLanguage === 'en' ? 'Please fill in all required fields' : 'Veuillez remplir tous les champs requis');
+            }
+            
+            return isValid;
+        }
+
+        function selectProgram(card) {
+            // Remove selected class from all cards
+            document.querySelectorAll('.program-card').forEach(c => c.classList.remove('selected'));
+            
+            // Add selected class to clicked card
+            card.classList.add('selected');
+            
+            // Set hidden input value
+            document.getElementById('selectedProgram').value = card.getAttribute('data-program');
+        }
+
+        function updateReview() {
+            const form = document.getElementById('applicationForm');
+            const formData = new FormData(form);
+            const reviewContent = document.getElementById('reviewContent');
+            
+            let reviewHTML = '<div style="display: grid; gap: 1rem;">';
+            
+            // Personal Information
+            reviewHTML += '<div><strong>Personal Information:</strong><br>';
+            reviewHTML += `Name: ${formData.get('firstName')} ${formData.get('middleName') || ''} ${formData.get('lastName')}<br>`;
+            reviewHTML += `Email: ${formData.get('email')}<br>`;
+            reviewHTML += `Phone: ${formData.get('phone')}<br>`;
+            reviewHTML += `Country: ${formData.get('country')}</div>`;
+            
+            // Program Selection
+            reviewHTML += '<div><strong>Program Selection:</strong><br>';
+            const selectedProgram = formData.get('selectedProgram');
+            const programCard = document.querySelector(`[data-program="${selectedProgram}"]`);
+            const programTitle = programCard ? programCard.querySelector('.program-title').textContent : selectedProgram;
+            reviewHTML += `Program: ${programTitle}<br>`;
+            reviewHTML += `Start Date: ${formData.get('startDate')}<br>`;
+            reviewHTML += `Learning Mode: ${formData.get('learningMode')}</div>`;
+            
+            // Documents
+            reviewHTML += '<div><strong>Documents:</strong><br>';
+            const idFile = form.querySelector('[name="idDocument"]').files[0];
+            reviewHTML += `ID Document: ${idFile ? idFile.name : 'Not uploaded'}<br>`;
+            const educationFile = form.querySelector('[name="educationCert"]').files[0];
+            reviewHTML += `Education Certificate: ${educationFile ? educationFile.name : 'Not uploaded'}<br>`;
+            const portfolioFile = form.querySelector('[name="portfolio"]').files[0];
+            reviewHTML += `Portfolio: ${portfolioFile ? portfolioFile.name : 'Not uploaded'}</div>`;
+            
+            reviewHTML += '</div>';
+            reviewContent.innerHTML = reviewHTML;
+        }
+
+        // Form submission
+        document.getElementById('applicationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Show loading
+            const submitBtn = this.querySelector('button[type="submit"]');
+            const originalText = submitBtn.innerHTML;
+            submitBtn.innerHTML = '⏳ Submitting...';
+            submitBtn.disabled = true;
+            
+            // Create FormData object
+            const formData = new FormData(this);
+            
+            // Submit to Formspree
+            fetch(this.action, {
+                method: 'POST',
+                body: formData,
+                headers: {
+                    'Accept': 'application/json'
+                }
+            })
+            .then(response => {
+                if (response.ok) {
+                    // Hide form and show success message
+                    document.querySelector('.card').style.display = 'none';
+                    document.getElementById('successMessage').style.display = 'block';
+                    
+                    // Send WhatsApp notification
+                    const applicantName = formData.get('firstName') + ' ' + formData.get('lastName');
+                    const selectedProgram = formData.get('selectedProgram');
+                    const whatsappMessage = `New Application Received!\n\nApplicant: ${applicantName}\nProgram: ${selectedProgram}\nEmail: ${formData.get('email')}\nPhone: ${formData.get('phone')}\n\nPlease check the admin panel for full details.`;
+                    
+                    // Optional: Auto-send WhatsApp notification to admin
+                    // window.open(`https://wa.me/250788244964?text=${encodeURIComponent(whatsappMessage)}`, '_blank');
+                    
+                } else {
+                    throw new Error('Submission failed');
+                }
+            })
+            .catch(error => {
+                console.error('Error:', error);
+                alert(currentLanguage === 'en' ? 
+                    'There was an error submitting your application. Please try again or contact us directly.' : 
+                    'Il y a eu une erreur lors de la soumission de votre candidature. Veuillez réessayer ou nous contacter directement.');
+                    
+                // Restore button
+                submitBtn.innerHTML = originalText;
+                submitBtn.disabled = false;
+            });
+        });
+
+        // Loading screen
+        window.addEventListener('load', function() {
+            setTimeout(function() {
+                const loadingScreen = document.getElementById('loadingScreen');
+                loadingScreen.classList.add('fade-out');
+                setTimeout(function() {
+                    loadingScreen.style.display = 'none';
+                }, 500);
+            }, 1500);
+        });
+
+        // Scroll animations
+        function animateOnScroll() {
+            const elements = document.querySelectorAll('.animate-on-scroll');
+            const windowHeight = window.innerHeight;
+            
+            elements.forEach(element => {
+                const elementTop = element.getBoundingClientRect().top;
+                const elementVisible = 150;
+                
+                if (elementTop < windowHeight - elementVisible) {
+                    element.classList.add('animate');
+                }
+            });
+        }
+
+        window.addEventListener('scroll', animateOnScroll);
+        window.addEventListener('load', animateOnScroll);
+
+        // Initialize on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            initLanguage();
+            setTimeout(animateOnScroll, 100);
+        });
+
+        // Set minimum date for date inputs to today
+        const today = new Date().toISOString().split('T')[0];
+        document.querySelectorAll('input[type="date"][name="startDate"]').forEach(input => {
+            input.min = today;
+        });
+
+        // Set maximum date for birth date to 18 years ago
+        const eighteenYearsAgo = new Date();
+        eighteenYearsAgo.setFullYear(eighteenYearsAgo.getFullYear() - 18);
+        document.querySelector('input[name="dateOfBirth"]').max = eighteenYearsAgo.toISOString().split('T')[0];
+    </script>
+</body>
+</html>
